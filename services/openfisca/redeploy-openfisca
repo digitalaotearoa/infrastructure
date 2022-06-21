@@ -1,5 +1,13 @@
 #!/bin/sh
 
+scriptname=$(basename $0)
+pidfile="/tmp/${scriptname}.lock"
+
+exec 8>${pidfile} # Setup lockfile using flock 
+flock -w 120 8 || exit 1  # Wait for 120s before bailing to give other webhooks time to complete
+
+cd /home/ubuntu/containers/openfisca-aotearoa
+echo "Caught hook at $(date +%Y-%m-%d-%H%M)" >> /home/ubuntu/webhooklog
 git fetch --all
 git reset --hard origin/main
 git clean -f -d 
