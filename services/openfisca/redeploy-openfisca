@@ -1,0 +1,10 @@
+#!/bin/sh
+
+git fetch --all
+git reset --hard origin/main
+git clean -f -d 
+git pull
+docker build . -t openfisca
+docker-compose stop
+docker-compose rm -f 
+docker-compose up -d
