@@ -1,5 +1,7 @@
 #!/bin/sh
 
+# Incoming webhooks to govzeroaotearoa/openfisca-aoteroa will trigger the below commands
+
 scriptname=$(basename $0)
 pidfile="/tmp/${scriptname}.lock"
 
